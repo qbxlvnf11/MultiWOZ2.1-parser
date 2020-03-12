@@ -15,6 +15,15 @@ LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
   - 16 domains: taxi, restaurant, police, hotel, hospital, attraction, bus, train
   - File: data.json, ontology.json, dialogue_acts.json, taxi_db.json etc.
 
+
+How to use
+=============
+
+```
+python main.py --data_path .
+```
+
+
 Datasets
 =============
 
