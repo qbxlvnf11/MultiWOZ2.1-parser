@@ -30,3 +30,42 @@ def anlysis_dialogue_log(d, multiWOZDataFrame):
 			multiWOZDataFrame.append_dialogue('User: ' + t['text'])
 			
 	return multiWOZDataFrame
+    
+# get multiWOZ data frame list
+def get_multiWOZ_data_frame_list(data):
+	
+	multiWOZDataFrameList = []
+	
+	for i, d in enumerate(data):
+		assert 'log' in d
+		assert 'goal' in d
+		
+		if i % 500 == 0:
+			print('num: ', i)
+		
+#		print('-' * 50)
+#		print()
+		
+		multiWOZDataFrame = MultiWOZDataFrame()
+		
+		multiWOZDataFrame.substitute_domain_list(get_domains(d))
+		
+		multiWOZDataFrame = anlysis_dialogue_log(d, multiWOZDataFrame)
+		
+		multiWOZDataFrameList.append(multiWOZDataFrame)
+		
+        #		print('domain', multiWOZDataFrame.get_domain_list())
+#		for i in range(len(multiWOZDataFrame.get_dialogue_state_list())):
+#			print('num: ', i + 1)
+#			print('taxi_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].taxi_bool)
+#			print('police_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].police_bool)
+#			print('restaurant_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].restaurant_bool)
+#			print('bus_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].bus_bool)
+#			print('hospital_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].hospital_bool)
+#			print('hotel_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].hotel_bool)
+#			print('hotel_hotel_semi_name: ', multiWOZDataFrame.get_dialogue_state_list()[i].hotel_semi_name)
+#			print('attraction_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].attraction_bool)
+#			print('train_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].train_bool)
+#			print()
+    
+	return multiWOZDataFrameList
