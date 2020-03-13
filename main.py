@@ -6,11 +6,12 @@ import numpy as np
 if __name__ == '__main__':
 	
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--data_path', metavar='data_path', required = True, help='data path of MULTIWOZ2.1')
+	parser.add_argument('--load_data_path', metavar='load_data_path', required = True, help='data load path of MULTIWOZ2.1')
+	parser.add_argument('--save_data_path', metavar='save_data_path', required = True, help='data save path of MULTIWOZ2.1')
 	args = parser.parse_args()
 	
 	# load total id of dialogs
-	basic_path = args.data_path + '/MULTIWOZ2.1/MULTIWOZ2.1'
+	basic_path = args.load_data_path + '/MULTIWOZ2.1/MULTIWOZ2.1'
 	data_json_path = basic_path + '/data.json'
 	data_json = load_json(data_json_path)
 	dialog_id_list = list(set(data_json.keys()))
@@ -38,40 +39,15 @@ if __name__ == '__main__':
 	assert(len(valid_data) == len(valid_id_list))
 	assert(len(test_data) == len(test_id_list))
 	
-	# get multiWOZ data frame list
-	multiWOZDataFrameList = []
-	
-	for i, d in enumerate(train_data):
-		assert 'log' in d
-		assert 'goal' in d
-		
-		if i % 500 == 0:
-			print('num: ', i)
-		
-#		print('-' * 50)
-#		print()
-		
-		multiWOZDataFrame = MultiWOZDataFrame()
-		
-		multiWOZDataFrame.substitute_domain_list(get_domains(d))
-		
-		multiWOZDataFrame = anlysis_dialogue_log(d, multiWOZDataFrame)
-		
-		multiWOZDataFrameList.append(multiWOZDataFrame)
-		
-#		print('domain', multiWOZDataFrame.get_domain_list())
-#		for i in range(len(multiWOZDataFrame.get_dialogue_state_list())):
-#			print('num: ', i + 1)
-#			print('taxi_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].taxi_bool)
-#			print('police_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].police_bool)
-#			print('restaurant_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].restaurant_bool)
-#			print('bus_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].bus_bool)
-#			print('hospital_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].hospital_bool)
-#			print('hotel_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].hotel_bool)
-#			print('hotel_hotel_semi_name: ', multiWOZDataFrame.get_dialogue_state_list()[i].hotel_semi_name)
-#			print('attraction_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].attraction_bool)
-#			print('train_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].train_bool)
-#			print()
+	# get multiWOZ train data frame list
+	multiWOZDataFrameListTrain = get_multiWOZ_data_frame_list(train_data)
+	print('train data')
+	multiWOZDataFrameListValid = get_multiWOZ_data_frame_list(valid_data)
+	print('valid data')
+	multiWOZDataFrameListTest = get_multiWOZ_data_frame_list(test_data)
+	print('test data')
 	
 	# save
-	np.save('multiWOZDataFrameList', np.array(multiWOZDataFrameList))
+	np.save(args.save_data_path + '/multiWOZDataFrameListTrain', np.array(multiWOZDataFrameListTrain))
+	np.save(args.save_data_path + 'multiWOZDataFrameListValid', np.array(multiWOZDataFrameListValid))
+	np.save(args.save_data_path + 'multiWOZDataFrameListTest', np.array(multiWOZDataFrameListTest))
