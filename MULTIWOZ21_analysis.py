@@ -1,3 +1,4 @@
+import operator
 from MULTIWOZ21_frame import *
 
 # extract domains from MULTIWOZ2.1
@@ -34,7 +35,8 @@ def anlysis_dialogue_log(d, multiWOZDataFrame):
 # extract user dialogue, system dialogue, dialogue state from MULTIWOZ2.1
 def anlysis_dialogue_acts(k, acts_json, multiWOZDataFrame):
 	
-	for k, acts in acts_json[k[:-5]].items():
+	sorted_key = sorted(acts_json[k[:-5]].items(), key=operator.itemgetter(0))
+	for k, acts in sorted_key:
 		multiWOZDataFrame.append_dialogue_acts(acts)
 	
 	return multiWOZDataFrame
