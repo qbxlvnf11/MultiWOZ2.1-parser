@@ -3,6 +3,7 @@ class MultiWOZDataFrame:
 		self.__domains_list = []
 		self.__dialogue_list = []
 		self.__dialogue_state_list = []
+		self.__dialogue_acts_list = []
 	
 	def substitute_domain_list(self, domains):
 		self.__domains_list = domains
@@ -21,6 +22,12 @@ class MultiWOZDataFrame:
 		
 	def get_dialogue_state_list(self):
 		return self.__dialogue_state_list
+		
+	def append_dialogue_acts(self, dialogue_acts):
+		self.__dialogue_acts_list.append(dialogue_acts)
+		
+	def get_dialogue_acts_list(self):
+		return self.__dialogue_acts_list
 		
 class DialogueState:
 	def __init__(self, metadata):
