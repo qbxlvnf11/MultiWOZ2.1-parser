@@ -30,15 +30,23 @@ def anlysis_dialogue_log(d, multiWOZDataFrame):
 			multiWOZDataFrame.append_dialogue('User: ' + t['text'])
 			
 	return multiWOZDataFrame
-    
+
+# extract user dialogue, system dialogue, dialogue state from MULTIWOZ2.1
+def anlysis_dialogue_acts(k, acts_json, multiWOZDataFrame):
+	
+	for k, acts in acts_json[k[:-5]].items():
+		multiWOZDataFrame.append_dialogue_acts(acts)
+	
+	return multiWOZDataFrame
+
 # get multiWOZ data frame list
-def get_multiWOZ_data_frame_list(data):
+def get_multiWOZ_data_frame_list(data_list, key_list, acts_json):
 	
 	multiWOZDataFrameList = []
 	
-	for i, d in enumerate(data):
-		assert 'log' in d
-		assert 'goal' in d
+	for i in range(len(data_list)):
+		assert 'log' in data_list[i]
+		assert 'goal' in data_list[i]
 		
 		if i % 500 == 0:
 			print('num: ', i)
@@ -48,13 +56,15 @@ def get_multiWOZ_data_frame_list(data):
 		
 		multiWOZDataFrame = MultiWOZDataFrame()
 		
-		multiWOZDataFrame.substitute_domain_list(get_domains(d))
+		multiWOZDataFrame.substitute_domain_list(get_domains(data_list[i]))
 		
-		multiWOZDataFrame = anlysis_dialogue_log(d, multiWOZDataFrame)
+		multiWOZDataFrame = anlysis_dialogue_acts(key_list[i], acts_json, multiWOZDataFrame)
+		
+		multiWOZDataFrame = anlysis_dialogue_log(data_list[i], multiWOZDataFrame)
 		
 		multiWOZDataFrameList.append(multiWOZDataFrame)
 		
-        #		print('domain', multiWOZDataFrame.get_domain_list())
+#		print('domain', multiWOZDataFrame.get_domain_list())
 #		for i in range(len(multiWOZDataFrame.get_dialogue_state_list())):
 #			print('num: ', i + 1)
 #			print('taxi_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].taxi_bool)
@@ -67,5 +77,5 @@ def get_multiWOZ_data_frame_list(data):
 #			print('attraction_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].attraction_bool)
 #			print('train_bool: ', multiWOZDataFrame.get_dialogue_state_list()[i].train_bool)
 #			print()
-    
+	
 	return multiWOZDataFrameList
