@@ -10,12 +10,13 @@ if __name__ == '__main__':
 	parser.add_argument('--save_data_path', metavar='save_data_path', required = True, help='data save path of MULTIWOZ2.1')
 	args = parser.parse_args()
 	
-	# load total id of dialogs
+	# load data json and acts json, total id of dialogs
 	basic_path = args.load_data_path + '/MULTIWOZ2.1/MULTIWOZ2.1'
 	data_json_path = basic_path + '/data.json'
 	data_json = load_json(data_json_path)
+	acts_json_path = basic_path + '/dialogue_acts.json'
+	acts_json = load_json(acts_json_path)
 	dialog_id_list = list(set(data_json.keys()))
-	# print(dialog_id_list)
 	
 	# load validate & test id
 	valid_list_path = basic_path + '/valListFile.json'
@@ -33,21 +34,21 @@ if __name__ == '__main__':
 	assert(len(dialog_id_list) == len(train_id_list) + len(valid_id_list) + len(test_id_list))
 	
 	# get train & validate & test data
-	train_data, valid_data, test_data = get_train_valid_test_data(data_json, train_id_list, valid_id_list, test_id_list)
+	train_data, train_key, valid_data, valid_key, test_data, test_key = get_train_valid_test_data(data_json, train_id_list, valid_id_list, test_id_list)
 	
 	assert(len(train_data) == len(train_id_list))
 	assert(len(valid_data) == len(valid_id_list))
 	assert(len(test_data) == len(test_id_list))
 	
 	# get multiWOZ train data frame list
-	multiWOZDataFrameListTrain = get_multiWOZ_data_frame_list(train_data)
+	multiWOZDataFrameListTrain = get_multiWOZ_data_frame_list(train_data, train_key, acts_json)
 	print('train data')
-	multiWOZDataFrameListValid = get_multiWOZ_data_frame_list(valid_data)
+	multiWOZDataFrameListValid = get_multiWOZ_data_frame_list(valid_data, valid_key, acts_json)
 	print('valid data')
-	multiWOZDataFrameListTest = get_multiWOZ_data_frame_list(test_data)
+	multiWOZDataFrameListTest = get_multiWOZ_data_frame_list(test_data, test_key, acts_json)
 	print('test data')
 	
 	# save
 	np.save(args.save_data_path + '/multiWOZDataFrameListTrain', np.array(multiWOZDataFrameListTrain))
-	np.save(args.save_data_path + 'multiWOZDataFrameListValid', np.array(multiWOZDataFrameListValid))
-	np.save(args.save_data_path + 'multiWOZDataFrameListTest', np.array(multiWOZDataFrameListTest))
+	np.save(args.save_data_path + '/multiWOZDataFrameListValid', np.array(multiWOZDataFrameListValid))
+	np.save(args.save_data_path + '/multiWOZDataFrameListTest', np.array(multiWOZDataFrameListTest))
