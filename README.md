@@ -5,7 +5,7 @@ Blog URL: https://blog.naver.com/qbxlvnf11
 
 LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
 
-- Upload MultiWOZ dataset parser code
+- MultiWOZ2.1 dataset parser for dialogue state tracking
 
 .
 
