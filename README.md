@@ -1,8 +1,5 @@
 - MultiWOZ2.1 dataset parser for dialogue state tracking
-
-.
-
-- MultiWOZ2.1
+- MultiWOZ2.1 dataset
   - The dataset consists of 10438 multi-domain dialogues
   - Train: 8438, Validate: 1000, Test: 1000
   - 16 domains: taxi, restaurant, police, hotel, hospital, attraction, bus, train
