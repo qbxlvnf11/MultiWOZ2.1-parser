@@ -6,11 +6,10 @@
   - 16 domains: taxi, restaurant, police, hotel, hospital, attraction, bus, train
   - File: data.json, ontology.json, dialogue_acts.json, taxi_db.json etc.
   
-====================================================
-- Blog URL: https://blog.naver.com/qbxlvnf11
+  
+**- Blog URL: https://blog.naver.com/qbxlvnf11
 
-- LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
-====================================================
+**- LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
 
 How to use
 =============
