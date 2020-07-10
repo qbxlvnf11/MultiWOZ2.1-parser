@@ -1,10 +1,3 @@
-
-It is posted by Yong (예비개발자).
-
-Blog URL: https://blog.naver.com/qbxlvnf11
-
-LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
-
 - MultiWOZ2.1 dataset parser for dialogue state tracking
 
 .
@@ -15,6 +8,9 @@ LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
   - 16 domains: taxi, restaurant, police, hotel, hospital, attraction, bus, train
   - File: data.json, ontology.json, dialogue_acts.json, taxi_db.json etc.
 
+Blog URL: https://blog.naver.com/qbxlvnf11
+
+LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
 
 How to use
 =============
