@@ -32,12 +32,6 @@ https://arxiv.org/pdf/1907.01669.pdf
 
 http://dialogue.mi.eng.cam.ac.uk/index.php/corpus/
 
-
-References
-=============
-
-Editing...
-
 Author
 =============
 
